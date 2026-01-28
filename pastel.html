@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background:aquamarine;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .cake-container {
+            position: relative;
+            width: 350px;
+            height: 450px;
+            margin: 0 auto;
+        }
+
+        /* Plato base */
+        .plate {
+            position: absolute;
+            width: 320px;
+            height: 15px;
+            background: linear-gradient(to bottom, #E8E8E8, #C0C0C0);
+            border-radius: 50%;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.3s forwards;
+        }
+
+        /* Capas del pastel con más realismo */
+        .cake-layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            border-radius: 5px;
+            opacity: 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Capa inferior - chocolate oscuro */
+        .layer1 {
+            width: 300px;
+            height: 90px;
+            background: linear-gradient(to bottom, #5C4033 0%, #3E2723 50%, #5C4033 100%);
+            bottom: 0;
+            animation: slideUp 0.8s ease-out 0.5s forwards;
+            border: 4px solid #3E2723;
+        }
+
+        .layer1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        /* Crema entre capas 1 y 2 */
+        .cream1 {
+            position: absolute;
+            width: 305px;
+            height: 15px;
+            background: linear-gradient(to bottom, #FFFACD, #FFF8DC);
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            border-radius: 50%;
+            opacity: 0;
+            animation: slideUp 0.6s ease-out 1.3s forwards;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Capa media - chocolate con leche */
+        .layer2 {
+            width: 280px;
+            height: 80px;
+            background: linear-gradient(to bottom, #8B4513 0%, #654321 50%, #8B4513 100%);
+            bottom: 100px;
+            animation: slideUp 0.8s ease-out 1.5s forwards;
+            border: 4px solid #654321;
+        }
+
+        .layer2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        /* Crema entre capas 2 y 3 */
+        .cream2 {
+            position: absolute;
+            width: 285px;
+            height: 15px;
+            background: linear-gradient(to bottom, #FFE4E1, #FFB6C1);
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            border-radius: 50%;
+            opacity: 0;
+            animation: slideUp 0.6s ease-out 2.3s forwards;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Capa superior - vainilla */
+        .layer3 {
+            width: 260px;
+            height: 70px;
+            background: linear-gradient(to bottom, #F5DEB3 0%, #DEB887 50%, #F5DEB3 100%);
+            bottom: 190px;
+            animation: slideUp 0.8s ease-out 2.5s forwards;
+            border: 4px solid #DEB887;
+        }
+
+        .layer3::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Cobertura final rosa */
+        .frosting-top {
+            position: absolute;
+            width: 265px;
+            height: 20px;
+            background: linear-gradient(to bottom, #FFB6C1, #FF69B4);
+            bottom: 260px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            border-radius: 50%;
+            opacity: 0;
+            animation: slideUp 0.6s ease-out 3.3s forwards;
+            box-shadow: 0 -2px 10px rgba(255, 105, 180, 0.4);
+        }
+
+        /* Decoraciones de crema */
+        .decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #FFE4E1, #FFB6C1);
+            border-radius: 50%;
+            opacity: 0;
+            animation: appear 0.5s ease-out forwards;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .decoration1 { bottom: 265px; left: 20%; animation-delay: 3.6s; }
+        .decoration2 { bottom: 265px; left: 40%; animation-delay: 3.7s; }
+        .decoration3 { bottom: 265px; left: 60%; animation-delay: 3.8s; }
+        .decoration4 { bottom: 265px; left: 80%; animation-delay: 3.9s; }
+
+        @keyframes appear {
+            to { opacity: 1; }
+        }
+
+        /* Velas mejoradas */
+        .candles {
+            position: absolute;
+            width: 100%;
+            bottom: 280px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            opacity: 0;
+            animation: appear 0.5s ease-out 4.2s forwards;
+        }
+
+        .candle {
+            width: 15px;
+            height: 70px;
+            background: linear-gradient(to right, #FF1493, #FF69B4, #FF1493);
+            border-radius: 3px;
+            position: relative;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+        }
+
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 8px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .candle::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            border-radius: 3px;
+        }
+
+        .flame {
+            position: absolute;
+            width: 22px;
+            height: 30px;
+            background: radial-gradient(ellipse at center, #FFF700 0%, #FFA500 40%, #FF4500 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: flameAppear 0.5s ease-out 4.7s forwards, flicker 0.4s ease-in-out 5.2s infinite;
+            box-shadow: 0 0 20px #FFA500, 0 0 40px #FF4500;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .flame.blown {
+            opacity: 0 !important;
+            animation: none;
+        }
+
+        .flame::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 18px;
+            background: radial-gradient(ellipse at center, #FFFF00 0%, #FFF700 50%, transparent 100%);
+            border-radius: 50%;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes flameAppear {
+            to { opacity: 1; }
+        }
+
+        @keyframes flicker {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1) translateY(0);
+                filter: brightness(1);
+            }
+            25% { 
+                transform: translateX(-50%) scale(1.05, 0.95) translateY(-2px);
+                filter: brightness(1.1);
+            }
+            50% { 
+                transform: translateX(-50%) scale(0.95, 1.05) translateY(1px);
+                filter: brightness(0.9);
+            }
+            75% { 
+                transform: translateX(-50%) scale(1.02, 0.98) translateY(-1px);
+                filter: brightness(1.05);
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #FF69B4;
+            opacity: 0;
+        }
+
+        .confetti.active {
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(600px) rotate(720deg);
+            }
+        }
+
+        /* Mensajes */
+        .message {
+            color: white;
+            font-size: 1.5em;
+            margin-top: 50px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 5s forwards;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .instruction {
+            color: white;
+            font-size: 1.1em;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 5.5s forwards, pulse 2s ease-in-out 6.5s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .mic-status {
+            color: #FFD700;
+            font-size: 0.9em;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 6s forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Feliz Cumpleaños! 🎂</h1>
+        
+        <div class="cake-container">
+            <!-- Plato -->
+            <div class="plate"></div>
+            
+            <!-- Capas del pastel -->
+            <div class="cake-layer layer1"></div>
+            <div class="cream1"></div>
+            <div class="cake-layer layer2"></div>
+            <div class="cream2"></div>
+            <div class="cake-layer layer3"></div>
+            
+            <!-- Cobertura final -->
+            <div class="frosting-top"></div>
+            
+            <!-- Decoraciones -->
+            <div class="decoration decoration1"></div>
+            <div class="decoration decoration2"></div>
+            <div class="decoration decoration3"></div>
+            <div class="decoration decoration4"></div>
+            
+            <!-- Velas -->
+            <div class="candles">
+                <div class="candle">
+                    <div class="flame" id="flame1"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame" id="flame2"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame" id="flame3"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">¡Que todos tus deseos se hagan realidad! ✨</div>
+        <div class="instruction">🎤 Sopla las velas usando tu micrófono 💨</div>
+        <div class="mic-status" id="micStatus">Esperando permiso del micrófono...</div>
+    </div>
+
+    <script>
+        let audioContext;
+        let analyser;
+        let microphone;
+        let dataArray;
+        let candlesBlown = 0;
+        let micActive = false;
+
+        // Crear confetti
+        function createConfetti() {
+            const colors = ['#FF69B4', '#FFD700', '#00CED1', '#FF6347', '#9370DB', '#32CD32'];
+            
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = confetti.style.width;
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.classList.add('active'), 10);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 20);
+            }
+        }
+
+        // Inicializar micrófono
+        async function initMicrophone() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                microphone = audioContext.createMediaStreamSource(stream);
+                
+                analyser.fftSize = 256;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+                
+                microphone.connect(analyser);
+                
+                document.getElementById('micStatus').textContent = '✅ Micrófono activado - ¡Sopla fuerte!';
+                micActive = true;
+                
+                detectBlow();
+            } catch (err) {
+                console.error('Error al acceder al micrófono:', err);
+                document.getElementById('micStatus').textContent = '❌ No se pudo acceder al micrófono. Haz clic en las velas para apagarlas.';
+                
+                // Permitir apagar velas con clic si no hay micrófono
+                document.querySelectorAll('.flame').forEach(flame => {
+                    flame.style.cursor = 'pointer';
+                    flame.addEventListener('click', function() {
+                        blowCandle(this);
+                    });
+                });
+            }
+        }
+
+        // Detectar soplido
+        function detectBlow() {
+            if (!micActive) return;
+            
+            analyser.getByteFrequencyData(dataArray);
+            
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+                sum += dataArray[i];
+            }
+            let average = sum / dataArray.length;
+            
+            // Si el sonido supera un umbral, apagar velas
+            if (average > 30 && candlesBlown < 3) {
+                const flames = document.querySelectorAll('.flame:not(.blown)');
+                if (flames.length > 0) {
+                    blowCandle(flames[0]);
+                }
+            }
+            
+            requestAnimationFrame(detectBlow);
+        }
+
+        // Apagar una vela
+        function blowCandle(flame) {
+            if (flame.classList.contains('blown')) return;
+            
+            flame.classList.add('blown');
+            candlesBlown++;
+            
+            // Efecto de humo
+            createSmoke(flame);
+            
+            if (candlesBlown === 3) {
+                setTimeout(() => {
+                    createConfetti();
+                    document.getElementById('micStatus').textContent = '🎉 ¡Felicidades! Tus deseos se harán realidad ❤️';
+                    
+                    setTimeout(() => {
+                        alert('🎉 ¡Feliz Cumpleaños mi amor! Que este día sea tan especial como tú lo eres para mí ❤️✨');
+                    }, 500);
+                }, 300);
+            }
+        }
+
+        // Crear efecto de humo
+        function createSmoke(flame) {
+            const rect = flame.getBoundingClientRect();
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const smoke = document.createElement('div');
+                    smoke.style.position = 'absolute';
+                    smoke.style.left = rect.left + rect.width / 2 + 'px';
+                    smoke.style.top = rect.top + 'px';
+                    smoke.style.width = '10px';
+                    smoke.style.height = '10px';
+                    smoke.style.background = '#888';
+                    smoke.style.borderRadius = '50%';
+                    smoke.style.opacity = '0.5';
+                    smoke.style.pointerEvents = 'none';
+                    document.body.appendChild(smoke);
+                    
+                    let opacity = 0.5;
+                    let y = 0;
+                    const interval = setInterval(() => {
+                        y -= 2;
+                        opacity -= 0.02;
+                        smoke.style.transform = `translateY(${y}px)`;
+                        smoke.style.opacity = opacity;
+                        
+                        if (opacity <= 0) {
+                            clearInterval(interval);
+                            smoke.remove();
+                        }
+                    }, 30);
+                }, i * 100);
+            }
+        }
+
+        // Confetti inicial cuando aparecen las velas
+        setTimeout(() => {
+            createConfetti();
+        }, 4700);
+
+        // Iniciar detección de micrófono después de que aparezcan las velas
+        setTimeout(() => {
+            initMicrophone();
+        }, 5500);
+    </script>
+</body>
+</html>

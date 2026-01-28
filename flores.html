@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tulipanes para ti 🌷</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #90EE90 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .title {
+            position: absolute;
+            top: 40px;
+            color: #C2185B;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .garden {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 50px;
+        }
+
+        .tulip {
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: grow 1.5s ease-out forwards;
+        }
+
+        @keyframes grow {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0);
+            }
+            60% {
+                transform: translateY(0) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Tallo */
+        .stem {
+            width: 6px;
+            height: 180px;
+            background: linear-gradient(to bottom, #2E7D32, #4CAF50);
+            border-radius: 3px;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+
+        /* Hoja izquierda */
+        .leaf-left {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            border-radius: 0 50% 50% 0;
+            top: 80px;
+            left: -35px;
+            transform: rotate(-30deg);
+            box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Hoja derecha */
+        .leaf-right {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(225deg, #4CAF50, #81C784);
+            border-radius: 50% 0 0 50%;
+            top: 120px;
+            right: -35px;
+            transform: rotate(30deg);
+            box-shadow: -1px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Flor del tulipán */
+        .flower {
+            position: absolute;
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
+        }
+
+        /* Pétalos */
+        .petal {
+            position: absolute;
+            width: 35px;
+            height: 60px;
+            background: linear-gradient(to bottom, #FF69B4, #FF1493);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: inset -3px -3px 10px rgba(0,0,0,0.1),
+                        2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .petal::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        /* Pétalo central trasero */
+        .petal-back {
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        /* Pétalo izquierdo */
+        .petal-left {
+            left: -8px;
+            top: 10px;
+            transform: rotate(-25deg);
+            z-index: 2;
+        }
+
+        /* Pétalo derecho */
+        .petal-right {
+            right: -8px;
+            top: 10px;
+            transform: rotate(25deg);
+            z-index: 2;
+        }
+
+        /* Centro de la flor */
+        .center {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: linear-gradient(to bottom, #FFD700, #FFA500);
+            border-radius: 50%;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            box-shadow: inset 0 -5px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Animación de balanceo suave */
+        @keyframes sway {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(-2deg); }
+            75% { transform: translateX(-50%) rotate(2deg); }
+        }
+
+        .tulip:hover .flower {
+            animation: sway 2s ease-in-out infinite;
+        }
+
+        /* Mensaje */
+        .message {
+            position: absolute;
+            bottom: 30px;
+            color: #C2185B;
+            font-size: 1.8em;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            opacity: 0;
+            animation: fadeIn 2s ease-in 3s forwards;
+            padding: 0 20px;
+        }
+
+        /* Mariposas */
+        .butterfly {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            animation: fly 8s ease-in-out infinite, fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(200px, -100px) rotate(10deg);
+            }
+            50% {
+                transform: translate(400px, -50px) rotate(-5deg);
+            }
+            75% {
+                transform: translate(200px, -120px) rotate(8deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        .butterfly::before,
+        .butterfly::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+            border-radius: 50% 0 50% 0;
+            animation: flap 0.3s ease-in-out infinite;
+        }
+
+        .butterfly::before {
+            left: 0;
+            transform-origin: right center;
+        }
+
+        .butterfly::after {
+            right: 0;
+            transform: scaleX(-1);
+            transform-origin: left center;
+        }
+
+        @keyframes flap {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.8); }
+        }
+
+        /* Pasto decorativo */
+        .grass {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to top, #2E7D32, #4CAF50);
+            opacity: 0.6;
+        }
+
+        .grass::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            top: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 10px,
+                rgba(46, 125, 50, 0.3) 10px,
+                rgba(46, 125, 50, 0.3) 20px
+            );
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Para ti, con todo mi amor 🌷</h1>
+
+    <div class="garden" id="garden">
+        <div class="grass"></div>
+    </div>
+
+    <div class="message">Cada tulipán es un te amo ❤️</div>
+
+    <script>
+        const garden = document.getElementById('garden');
+        const numberOfTulips = 12;
+        const positions = [];
+
+        // Generar posiciones aleatorias sin superposición
+        function generatePosition() {
+            let attempts = 0;
+            while (attempts < 50) {
+                const newPos = Math.random() * 85 + 5; // Entre 5% y 90%
+                let tooClose = false;
+                
+                for (let pos of positions) {
+                    if (Math.abs(newPos - pos) < 8) {
+                        tooClose = true;
+                        break;
+                    }
+                }
+                
+                if (!tooClose) {
+                    positions.push(newPos);
+                    return newPos;
+                }
+                attempts++;
+            }
+            return Math.random() * 85 + 5;
+        }
+
+        // Crear tulipanes
+        for (let i = 0; i < numberOfTulips; i++) {
+            setTimeout(() => {
+                const tulip = document.createElement('div');
+                tulip.className = 'tulip';
+                tulip.style.left = generatePosition() + '%';
+                tulip.style.animationDelay = (i * 0.2) + 's';
+                
+                // Variación en altura
+                const heightVariation = Math.random() * 40 - 20;
+                
+                tulip.innerHTML = `
+                    <div class="flower">
+                        <div class="petal petal-back"></div>
+                        <div class="petal petal-left"></div>
+                        <div class="petal petal-right"></div>
+                        <div class="center"></div>
+                    </div>
+                    <div class="stem" style="height: ${180 + heightVariation}px">
+                        <div class="leaf-left"></div>
+                        <div class="leaf-right"></div>
+                    </div>
+                `;
+                
+                garden.appendChild(tulip);
+            }, i * 200);
+        }
+
+        // Crear mariposas
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                const butterfly = document.createElement('div');
+                butterfly.className = 'butterfly';
+                butterfly.style.top = (20 + Math.random() * 40) + '%';
+                butterfly.style.left = (10 + Math.random() * 20) + '%';
+                butterfly.style.animationDelay = (i * 2) + 's';
+                butterfly.style.animationDuration = (6 + Math.random() * 4) + 's';
+                document.body.appendChild(butterfly);
+            }, 2000 + i * 1000);
+        }
+
+        // Efecto de clic en tulipanes
+        setTimeout(() => {
+            const tulips = document.querySelectorAll('.tulip');
+            tulips.forEach((tulip, index) => {
+                tulip.style.cursor = 'pointer';
+                tulip.addEventListener('click', function() {
+                    // Crear corazones flotantes
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.style.position = 'absolute';
+                    heart.style.fontSize = '30px';
+                    heart.style.left = this.style.left;
+                    heart.style.bottom = '200px';
+                    heart.style.animation = 'floatHeart 2s ease-out forwards';
+                    heart.style.pointerEvents = 'none';
+                    garden.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 2000);
+                });
+            });
+        }, numberOfTulips * 200 + 500);
+
+        // Animación de corazones flotantes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatHeart {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(0);
+                }
+                50% {
+                    transform: translateY(-100px) scale(1.2);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-200px) scale(0.8);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
